@@ -13,7 +13,9 @@ function __init__()
         codify(x::Unitful.Quantity, spaces) = begin 
             io = IOBuffer()
             print(IOContext(io, :showoperators => true), x)
-            (replace(String(take!(io))," " => "u\"") * "\"",)
+            str = String(take!(io))
+            # Replace space before units with u"" string macro
+            occursin(" ", str) ? (replace(str, " " => "u\"") * "\"",) : (str,)
         end
     end
 end
