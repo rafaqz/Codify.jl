@@ -9,7 +9,7 @@ export codify
 # Optionally load Unitful
 function __init__()
     @require Unitful="1986cc42-f94f-5a68-af5c-568840ba703d" begin
-        using Unitful
+        using .Unitful
         codify(x::Unitful.Quantity, spaces) = begin 
             io = IOBuffer()
             print(IOContext(io, :showoperators => true), x)
