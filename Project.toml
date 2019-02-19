@@ -10,6 +10,7 @@ Requires = "ae029012-a4dd-5104-9daa-d747884805df"
 [extras]
 FieldDefaults = "49426c49-986f-5969-8844-d5cc96441cfc"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["FieldDefaults", "Unitful"]
+test = ["FieldDefaults", "Unitful", "Test"]
