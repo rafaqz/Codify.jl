@@ -22,15 +22,20 @@ end
 
 linebreak(exps) = length(exps) > 0 ? :("\n", spaces) : :("",)
 
-codify_inner(T) = codify_combiner(T, [Expr(:..., codify_builder(T, fn)) for fn in fieldnames(T)])
-codify_combiner(T, exps) = :(string($T.name.name, "(", $(exps...), $(linebreak(exps))..., ")"))
-codify_combiner(T::Type{<:Tuple}, exps) = :(string("(", $(exps...), $(linebreak(exps))..., ")"))
+codify_inner(T) = 
+    codify_combiner(T, [Expr(:..., codify_builder(T, fn)) for fn in fieldnames(T)])
+codify_combiner(T, exps) = 
+    :(string($T.name.name, "(", $(exps...), $(linebreak(exps))..., ")"))
+codify_combiner(T::Type{<:Tuple}, exps) = 
+    :(string("(", $(exps...), $(linebreak(exps))..., ")"))
 codify_builder(T::Type{<:Tuple}, fname) = quote
-    string.("\n    ", spaces, codify(getfield(t, $(QuoteNode(fname))), spaces * "    "), ",")
+    fieldcode = codify(getfield(t, $(QuoteNode(fname))), spaces * "    ")
+    string.("\n    ", spaces, fieldcode, ",")
 end
 codify_builder(T, fname) = quote
     if flattenable($T, Val{$(QuoteNode(fname))})
-        string.("\n    ", spaces, $(QuoteNode(fname)), " = ", codify(getfield(t, $(QuoteNode(fname))), spaces * "    "), ",")
+        string.("\n    ", spaces, $(QuoteNode(fname)), " = ", 
+                codify(getfield(t, $(QuoteNode(fname))), spaces * "    "), ",")
     else
         ()
     end
