@@ -1,5 +1,9 @@
 # Codify
 
+[![Build Status](https://travis-ci.org/rafaqz/Codify.jl.svg?branch=master)](https://travis-ci.org/rafaqz/Codify.jl)
+[![codecov.io](http://codecov.io/github/rafaqz/Codify.jl/coverage.svg?branch=master)](http://codecov.io/github/rafaqz/Codify.jl?branch=master)
+
+
 Codify converts julia structs to the code for their keyword-argument
 constructor. It works with basic types like Number, Symbol and Nothing and
 Unitful.jl units, and structs or tuple nested to any depth.
