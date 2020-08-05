@@ -17,3 +17,12 @@ file.
 `codify(x)` assumes that all nested structs have keyword constructors with at
 least the same keywords as the flattenable field names. Using FieldDefaults.jl
 or Parameters.jl are easy ways to achieve this.
+
+If you need additional types to be converted to code text, you can define:
+
+```julia
+codify(x::TheType, space) = ("the code",)
+```
+
+And yes, the code needs to be in a tuple, so that empty fields can be splatted away. You don't have to
+add the nesting `space` manually to your code output, it's added at the struct level.
