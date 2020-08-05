@@ -21,7 +21,7 @@ or Parameters.jl are easy ways to achieve this.
 If you need additional types to be converted to code text, you can define:
 
 ```julia
-codify(x::TheType, space) = ("the code",)
+Codify.codify(x::TheType, space) = ("the code",)
 ```
 
 And yes, the code needs to be in a tuple, so that empty fields can be splatted away. You don't have to
